@@ -46,14 +46,7 @@ public class MainActivity extends AppCompatActivity implements RedditFeedFragmen
 
     @Override
     public void showPost(RedditPost currPost) {
-
-        Bundle args = new Bundle();
-        args.putString("title", currPost.title);
-        args.putString("imageURL", currPost.imageURl);
-        args.putString("bodyText", currPost.bodyText);
-
-        Fragment redditPostFragment = new RedditPostFragment();
-        redditPostFragment.setArguments(args);
+        Fragment redditPostFragment = RedditPostFragment.newInstance(currPost.title, currPost.imageURl, currPost.bodyText, this);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         transaction.add(R.id.fragment_container, redditPostFragment);

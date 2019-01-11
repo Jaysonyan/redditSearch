@@ -41,9 +41,9 @@ public class RedditPostFragment extends Fragment {
         super.onAttach(context);
         Bundle args = getArguments();
         if (args != null) {
-            title = args.getString("title");
-            imageURL = args.getString("imageURL");
-            bodyText = args.getString("bodyText");
+            title = args.getString(getString(R.string.reddit_post_title));
+            imageURL = args.getString(getString(R.string.reddit_post_imageURL));
+            bodyText = args.getString(getString(R.string.reddit_post_bodyText));
         }
         if (context instanceof RemovePost) {
             currActiviy = (RemovePost) context;
@@ -84,6 +84,18 @@ public class RedditPostFragment extends Fragment {
             }
         });
 
+    }
+
+    public static RedditPostFragment newInstance(String title, String imageURL, String bodyText, Context context) {
+        Bundle args = new Bundle();
+
+        args.putString(context.getResources().getString(R.string.reddit_post_title), title);
+        args.putString(context.getResources().getString(R.string.reddit_post_imageURL), imageURL);
+        args.putString(context.getResources().getString(R.string.reddit_post_bodyText), bodyText);
+
+        RedditPostFragment redditPostFragment = new RedditPostFragment();
+        redditPostFragment.setArguments(args);
+        return redditPostFragment;
     }
 
     public interface RemovePost {

@@ -76,20 +76,20 @@ public class RecyclerViewAdaptor extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         String credits = "Posted by: " + allPosts.get(position).author + " on " + allPosts.get(position).subReddit;
         String link = "<a href='https://www.reddit.com"+ allPosts.get(position).link+"'>" + credits + " </a>";
+
         if (holder instanceof ViewHolder) {
             ((ViewHolder) holder).title.setText(allPosts.get(position).title);
             ((ViewHolder) holder).title.setText(allPosts.get(position).title);
             ((ViewHolder) holder).author.setMovementMethod(LinkMovementMethod.getInstance());
             ((ViewHolder) holder).author.setText(Html.fromHtml((link)));
-        }
 
-        if (ViewType.values()[holder.getItemViewType()] == ViewType.IMAGE) {
-            glide.load(allPosts.get(position).imageURl)
-                    .into(((ViewHolder) holder).image);
-        } else {
-            ((ViewHolder) holder).image.setVisibility(View.GONE);
+            if (ViewType.values()[holder.getItemViewType()] == ViewType.IMAGE) {
+                glide.load(allPosts.get(position).imageURl)
+                        .into(((ViewHolder) holder).image);
+            } else {
+                ((ViewHolder) holder).image.setVisibility(View.GONE);
+            }
         }
-
     }
 
     @Override
